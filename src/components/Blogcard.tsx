@@ -1,15 +1,18 @@
+import { BlogTypes } from "@/Types";
 import Link from "next/link";
-
-export default function BlogCard({ data }) {
-    const { title, thumbnail, slug, content, created_at } = data;
+type BlogCardProps = {
+    data: BlogTypes,
+}
+export default function BlogCard({ data }: BlogCardProps) {
+    const { id, title, thumbnail, slug, content, created_at } = data;
     return (
         <div className="w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <Link href={`blog/${slug}`}>
-                <img className="rounded-t-lg" src={thumbnail} alt="" />
+                <img className="rounded-t-lg h-[200px] w-full object-cover" src={thumbnail} alt="" />
             </Link>
             <div className="p-5">
                 <Link href={`blog/${slug}`}>
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    <h5 className="mb-2 text-[20px] font-semibold tracking-tight text-gray-900 dark:text-white">
                         {title}
                     </h5>
                 </Link>
