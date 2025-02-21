@@ -1,24 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-*{
+
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-/* :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
-
 .error {
   color: red;
   font-size: 14px;
+}
+
+.full-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  z-index: 2;
 }
