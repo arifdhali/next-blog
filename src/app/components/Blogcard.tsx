@@ -1,4 +1,4 @@
-import { BlogTypes } from "@/Types";
+import { BlogTypes } from "@/src/Types";
 import Link from "next/link";
 type BlogCardProps = {
     data: BlogTypes,

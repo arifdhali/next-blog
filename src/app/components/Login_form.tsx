@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 import { useFormik } from "formik";
-import { Authentication } from "@/Types";
+import { Authentication } from "@/src/Types";
 import * as Yup from "yup"
 import { useEffect } from "react";
 import { toast } from "sonner";

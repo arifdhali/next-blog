@@ -1,4 +1,4 @@
-import db from "@/libs/db";
+import db from "@/src/libs/db";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {

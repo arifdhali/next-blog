@@ -1,5 +1,5 @@
-import BlogCard from "@/components/Blogcard";
-import { BlogTypes } from "@/Types";
+import BlogCard from "@/src/app/components/Blogcard";
+import { BlogTypes } from "@/src/Types";
 export default async function BlogPage() {
     let res = await fetch(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/blog`);
     let data: BlogTypes[] = await res.json();

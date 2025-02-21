@@ -1,4 +1,4 @@
-import db from "@/libs/db";
+import db from "@/src/libs/db";
 import { RowDataPacket } from "mysql2";
 import { NextResponse, NextRequest } from "next/server";
 import jwt from "jsonwebtoken";

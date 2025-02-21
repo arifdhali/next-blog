@@ -1,5 +1,3 @@
-import { BlogTypes } from "@/Types";
-
 type Params = {
     slug: string,
 }
