@@ -1,3 +1,5 @@
+"use client";
+import DOMPurify from 'dompurify';
 import { BlogTypes } from "@/src/Types";
 import Link from "next/link";
 type BlogCardProps = {
@@ -5,10 +7,11 @@ type BlogCardProps = {
 }
 export default function BlogCard({ data }: BlogCardProps) {
     const { id, title, thumbnail, slug, content, created_at } = data;
+    const contentHTML = DOMPurify.sanitize(content);
     return (
         <div className="w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <Link href={`blog/${slug}`}>
-                <img className="rounded-t-lg h-[200px] w-full object-cover" src={thumbnail} alt="" />
+                <img className="rounded-t-lg h-[200px] w-full object-cover" src={`${process.env.NEXT_PUBLIC_CLIENT_URL}/uploads/${thumbnail}`} alt={title} />
             </Link>
             <div className="p-5">
                 <Link href={`blog/${slug}`}>
@@ -16,9 +19,12 @@ export default function BlogCard({ data }: BlogCardProps) {
                         {title}
                     </h5>
                 </Link>
-                <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
-                    {content}
-                </p>
+
+                <div
+                    className="mb-3 font-normal text-gray-700 dark:text-gray-400"
+                    dangerouslySetInnerHTML={{ __html: contentHTML.slice(0,100) }}
+                ></div>
+
                 <Link
                     href={`blog/${slug}`}
                     className="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -41,6 +47,6 @@ export default function BlogCard({ data }: BlogCardProps) {
                     </svg>
                 </Link>
             </div>
-        </div>
+        </div >
     )
 }

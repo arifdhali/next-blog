@@ -19,7 +19,6 @@ export async function POST(request: NextRequest) {
             let [rows] = await db.query<RowDataPacket[]>(query, [email]);
             if (rows.length > 0) {
                 let user = rows[0];
-                console.log(user.password)
                 if (user.password == password) {
                     let token = jwt.sign(
                         {
@@ -32,8 +31,8 @@ export async function POST(request: NextRequest) {
                         'USER_TOKEN',
                         token,
                         {
-                            httpOnly: true,
-                            secure: true,
+                            httpOnly: false,
+                            secure: process.env.NODE_ENV == 'production',
                             maxAge: 2 * 24 * 60 * 60
                         }
                     )

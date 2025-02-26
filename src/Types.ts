@@ -13,3 +13,11 @@ export interface Authentication {
     password: string
 
 }
+
+
+export interface AddBlog {
+    title: string,
+    thumbnail: null | string,
+    content: string,
+    status: string
+}
