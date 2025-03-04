@@ -22,7 +22,7 @@ export async function POST(request: NextRequest) {
         fs.mkdirSync(uploadDir, {
             recursive: true,
         })
-        const fileName = `${new Date().getTime()}-${title}-${thumbnail.name}`;
+        const fileName = `${new Date().getTime()}-${thumbnail.name}`;
         let filePath = path.join(uploadDir, fileName)
         console.log(filePath);
         let dbColumns = {
@@ -40,6 +40,7 @@ export async function POST(request: NextRequest) {
         let [insertResponse] = await db.query(inserPost, fieldValues) as any;
         if (insertResponse.affectedRows >= 1) {
             fs.writeFileSync(filePath, buffer);
+
             return NextResponse.json({
                 status: true,
                 message: "Post created succssfully"

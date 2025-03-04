@@ -1,4 +1,3 @@
-"use client";
 import DOMPurify from 'dompurify';
 import { BlogTypes } from "@/src/Types";
 import Link from "next/link";
@@ -7,7 +6,6 @@ type BlogCardProps = {
 }
 export default function BlogCard({ data }: BlogCardProps) {
     const { id, title, thumbnail, slug, content, created_at } = data;
-    const contentHTML = DOMPurify.sanitize(content);
     return (
         <div className="w-full bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
             <Link href={`blog/${slug}`}>
@@ -16,13 +14,12 @@ export default function BlogCard({ data }: BlogCardProps) {
             <div className="p-5">
                 <Link href={`blog/${slug}`}>
                     <h5 className="mb-2 text-[20px] font-semibold tracking-tight text-gray-900 dark:text-white">
-                        {title}
+                        {title.length > 20 ? title.slice(0, 50) +'...' : title}
                     </h5>
                 </Link>
 
                 <div
                     className="mb-3 font-normal text-gray-700 dark:text-gray-400"
-                    dangerouslySetInnerHTML={{ __html: contentHTML.slice(0,100) }}
                 ></div>
 
                 <Link
