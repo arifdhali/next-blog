@@ -2,7 +2,7 @@ import db from "@/src/libs/db";
 import { NextResponse } from "next/server";
 export async function GET() {
     try {
-        const [rows] = await db.query("SELECT * FROM posts ORDER BY created_at DESC LIMIT 10");
+        const [rows] = await db.query("SELECT * FROM posts WHERE status = ? ORDER BY created_at DESC LIMIT 10",['published']);
         return NextResponse.json(rows);
     } catch (error) {
         console.error("❌ Database Query Error:", error);

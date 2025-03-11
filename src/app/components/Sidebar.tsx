@@ -1,6 +1,27 @@
+"use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Sidebar() {
+    const router = useRouter();
+    const handleSignout = async () => {
+
+        try {
+
+            let response = await fetch(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/dashboard/signout`, {
+                method: 'POST',
+                credentials:'include',
+                cache: 'no-cache'
+            })
+            let data = await response.json();
+            if (data.status) {
+                router.push("/login");
+            }
+        } catch (error) {
+            console.error("Error fetching posts:", error);
+
+        }
+    };
     return (
         <>
             <nav className="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -177,7 +198,7 @@ export default function Sidebar() {
                                 d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"
                             />
                         </svg>
-                        <span className="flex-1 ms-3 whitespace-nowrap">Sign Out</span>
+                        <span className="flex-1 ms-3 whitespace-nowrap" onClick={handleSignout}>Sign Out</span>
                     </div>
                 </div>
             </aside>

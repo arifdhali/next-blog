@@ -1,4 +1,24 @@
+"use client";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+interface NavlinkProps {
+    href: string
+    children: React.ReactNode
+    className?: string
+    active?: string
+}
+
+export function NavLink({ href, children, active }: NavlinkProps) {
+    let path = usePathname();
+    const isActive = path === href && path.startsWith(path);
+    console.log(href)
+    return (
+        <>
+            <Link className={isActive ? active : ''} href={href} >{children}</Link>
+        </>
+    )
+}
 
 export default function Navbar() {
     return (
@@ -26,13 +46,16 @@ export default function Navbar() {
                     <ul className="flex font-semibold justify-between">
                         {/* Active Link = text-indigo-500
       Inactive Link = hover:text-indigo-500 */}
-                        <li className="md:px-4 md:py-2 text-indigo-500">
-                            <Link href={'/'}>
+                        <li className="md:px-4 md:py-2 hover:text-indigo-400">
+                            <NavLink href="/" active="text-indigo-500">
                                 Home
-                            </Link>
+                            </NavLink>
+
                         </li>
                         <li className="md:px-4 md:py-2 hover:text-indigo-400">
-                            <Link href={'/blog'}>Blog</Link>
+                            <NavLink href="/blog" active="text-indigo-500">
+                                Blog
+                            </NavLink>
                         </li>
                     </ul>
                 </div>

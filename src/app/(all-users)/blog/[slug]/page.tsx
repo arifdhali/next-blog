@@ -1,3 +1,4 @@
+"use client";
 import SanitizedContent from '@/src/app/components/SanitaizeContent';
 
 type Params = {
@@ -18,10 +19,10 @@ async function getBlogData(slug: string) {
 }
 
 export default async function Page({ params }: { params: Params }) {
-    if (!params || !params.slug) {
+    let { slug } = await params;
+    if (!slug) {
         return <div>Loading...</div>
     }
-    const { slug } = params;
     const data = await getBlogData(slug);
     if (!data) {
         return <div>Blog not found</div>;
